@@ -1,0 +1,15 @@
+﻿@model MyTaskApplication.Controllers.HomeController
+
+@{
+    ViewBag.Title = "Welcome to ELMA FileStorage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome to ELMA FileStorage</h2>
+
+                <p> Before save your files you must <b>@Html.ActionLink("Log in", "Login", "User")</b> to your account.</p>
+                <p> If you do not have account, you must register in the system by clicking on <b>@Html.ActionLink("Register", "Register", "User")</b>.</p>
+                <p> Only after that, you will be able to place your files on the system. </p>
+
+
+    

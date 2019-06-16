@@ -1,0 +1,127 @@
+﻿@model IEnumerable<MyTaskApplication.Models.Documents>
+
+@{
+    ViewBag.Title = "ELMA FileStorage - Users Documents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p></p>
+<html>
+<body>
+<div>
+    <fieldset>
+        <legend>Upload document</legend>
+        @using (Html.BeginForm("UploadFile", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="file" name="postedFile" />
+            <input type="submit" id="btnUpload" value="Upload" />
+        }
+
+        @using (Html.BeginForm("OpenFile", "Document", FormMethod.Post))
+        {
+            <input type="hidden" id="hfDocumentID" name="DocumentID" />
+            <input type="submit" id="btnDownload" value="Download" style="display:none" />
+        }
+        
+        </fieldset>
+    <fieldset>
+        <legend>Search document</legend>
+        @using (Html.BeginForm())
+        {
+            <div class="editor-field">@Html.TextBox("SearchString")  <input type="submit" value="Search" /></div> 
+        }
+    </fieldset>
+</div>
+
+    <h2>ELMA FileStorage - Users Documents</h2>
+<div>
+            <table id="mytable">
+                <thead>
+                <tr>
+                    <th>
+                       Filename
+                       @Html.ActionLink("^", "Index", new { sortOrder = ViewBag.NameSortParm },new {style = "color:white" })
+                    </th>
+                    <th>
+                        Publish Date
+                        @Html.ActionLink("^", "Index", new { sortOrder = ViewBag.DateSortParm }, new { style = "color:white" })
+                    </th>
+                    <th>
+                        File Author
+                        @Html.ActionLink("^", "Index", new { sortOrder = ViewBag.AuthorSortParm }, new { style = "color:white" })
+                    </th>
+                    <th>
+                        File
+                    </th>
+                </tr>
+                    </thead>
+
+                <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @MyTaskApplication.Models.StringEllipsis.TruncateWithStringEllipsis(@item.DocumentName, 30)
+                        </td>
+                        <td>
+                            @item.DocumentDate
+                        </td>
+                        <td>
+                            @item.DocumentAuthor
+                        </td>
+                        <td>
+                            
+                            <a href="javascript:;" onclick="DownloadFile(@item.DocumentID)"> Open file </a> &nbsp;&nbsp;&nbsp;<img atl="elma" src="@Url.Content("~/Content/file.png")" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+
+    <style>
+        table#mytable {
+            width: 100%;
+            background-color: #f1f1c1;
+        }
+
+            table#mytable tr:nth-child(even) {
+                background-color: #eee;
+            }
+
+            table#mytable tr:nth-child(odd) {
+                background-color: #fff;
+            }
+
+            table#mytable th {
+                color: white;
+                background-color: blue;
+            }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style> 
+            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+            <script type="text/javascript">
+        function DownloadFile(DocumentID) {
+            $("#hfDocumentID").val(DocumentID);
+            $("#btnDownload")[0].click();
+        };
+            </script>
+</div>
+</body>
+</html>

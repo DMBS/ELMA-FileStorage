@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="MyTaskApplication" namespace="MyTaskApplication.Models">
+  <class name="Documents" table="Documents" dynamic-update="true" >
+    <id name="DocumentID" column ="DocumentID" type="Int32">
+      <generator class="identity" />
+    </id>
+    <property name="DocumentName" />
+    <property name="DocumentType" />
+    <property name="DocumentDate" />
+    <property name="DocumentAuthor" />
+    <property name="DocumentBinaryFile" type="BinaryBlob">
+      <column name="DocumentBinaryFile" sql-type="varbinary(max)" length="2147483647"/>
+    </property>
+  </class>
+</hibernate-mapping>

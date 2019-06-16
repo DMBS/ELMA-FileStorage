@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="MyTaskApplication" namespace="MyTaskApplication.Models">
+  <class name="Users" table="Users" dynamic-update="true" >
+    <id name="UserID" column ="UserID" type="Int32">
+      <generator class="identity" />
+    </id>
+    <property name="UserName" />
+    <property name="Password"  />
+    <property name="Email" />
+  </class>
+</hibernate-mapping>
